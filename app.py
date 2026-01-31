@@ -18,7 +18,7 @@ st.write(f"**Institution:** {institution}")
 
 st.image(
     "https://share.google/1xr8sohFUFT6vmjA4",
-    caption="Nature (Pixabay)"
+    caption="Data Scientist"
     
 )
 
