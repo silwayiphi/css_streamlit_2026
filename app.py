@@ -20,8 +20,8 @@ except:
     )
 
 st.sidebar.title("Mr Mthokozisi S. Mathonsi")
-st.sidebar.write("🎓 Data Scientist")
-st.sidebar.write("🏫 University of Zululand")
+st.sidebar.write("Data Scientist")
+st.sidebar.write("University of Zululand")
 
 section = st.sidebar.radio(
     "Navigation",
@@ -95,7 +95,7 @@ elif section == "Skills & Tools":
 elif section == "Projects":
     st.title("Research & Development Projects")
 
-    with st.expander("🤖 Multilingual Student Support Chatbot"):
+    with st.expander("Multilingual Student Support Chatbot"):
         st.markdown("""
         **Description:**  
         A chatbot developed to assist first-year University of Zululand students with
@@ -107,7 +107,7 @@ elif section == "Projects":
         - Designed specifically for first-year students
         """)
 
-    with st.expander("🪑 Digital Examination Seating Plan System"):
+    with st.expander("Digital Examination Seating Plan System"):
         st.markdown("""
         **Description:**  
         A digital examination seating plan system designed to improve the traditional
@@ -119,7 +119,7 @@ elif section == "Projects":
         - Improved efficiency during examinations
         """)
 
-    with st.expander("😊 Emotion Detection from isiZulu Text (Honours Research)"):
+    with st.expander("Emotion Detection from isiZulu Text (Honours Research)"):
         st.markdown("""
         **Description:**  
         An honours research project focused on detecting emotions from isiZulu text using
