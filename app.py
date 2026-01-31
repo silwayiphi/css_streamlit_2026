@@ -14,7 +14,7 @@ st.set_page_config(
 # Sidebar
 # -----------------------------
 st.sidebar.image(
-    "https://share.google/0XfdpDBFjE3PT9rwc",
+    "useMe.jpg",
     width=200
 )
 
