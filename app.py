@@ -2,120 +2,200 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Title of the app
-st.title("Researcher Profile Page with STEM Data")
+# -----------------------------
+# Page configuration
+# -----------------------------
+st.set_page_config(
+    page_title="Researcher Profile | Mthokozisi Mathonsi",
+    layout="wide"
+)
 
-# Collect basic information
-name = "Mr Mthokozisi Silwayiphi Mathonsi"
-field = "Data Science"
-institution = "University of Zululand"
-
-# Display basic profile information
-st.header("Researcher Overview")
-st.write(f"**Name:** {name}")
-st.write(f"**Field of Research:** {field}")
-st.write(f"**Institution:** {institution}")
-
-st.image(
+# -----------------------------
+# Sidebar
+# -----------------------------
+st.sidebar.image(
     "https://share.google/0XfdpDBFjE3PT9rwc",
-    caption="Data Scientist"
-    
+    width=200
 )
 
-# Add a section for publications
-st.header("Publications")
-uploaded_file = st.file_uploader("Upload a CSV of Publications", type="csv")
+st.sidebar.title("Mr Mthokozisi S. Mathonsi")
+st.sidebar.write("🎓 Data Scientist")
+st.sidebar.write("🏫 University of Zululand")
 
-if uploaded_file:
-    publications = pd.read_csv(uploaded_file)
-    st.dataframe(publications)
-
-    # Add filtering for year or keyword
-    keyword = st.text_input("Filter by keyword", "")
-    if keyword:
-        filtered = publications[
-            publications.apply(lambda row: keyword.lower() in row.astype(str).str.lower().values, axis=1)
-        ]
-        st.write(f"Filtered Results for '{keyword}':")
-        st.dataframe(filtered)
-    else:
-        st.write("Showing all publications")
-
-# Add a section for visualizing publication trends
-st.header("Publication Trends")
-if uploaded_file:
-    if "Year" in publications.columns:
-        year_counts = publications["Year"].value_counts().sort_index()
-        st.bar_chart(year_counts)
-    else:
-        st.write("The CSV does not have a 'Year' column to visualize trends.")
-
-# Add STEM Data Section
-st.header("Explore STEM Data")
-
-# Generate dummy data
-physics_data = pd.DataFrame({
-    "Experiment": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
-    "Energy (MeV)": [4.2, 1.5, 2.9, 3.4, 7.1],
-    "Date": pd.date_range(start="2024-01-01", periods=5),
-})
-
-astronomy_data = pd.DataFrame({
-    "Celestial Object": ["Mars", "Venus", "Jupiter", "Saturn", "Moon"],
-    "Brightness (Magnitude)": [-2.0, -4.6, -1.8, 0.2, -12.7],
-    "Observation Date": pd.date_range(start="2024-01-01", periods=5),
-})
-
-weather_data = pd.DataFrame({
-    "City": ["Cape Town", "London", "New York", "Tokyo", "Sydney"],
-    "Temperature (°C)": [25, 10, -3, 15, 30],
-    "Humidity (%)": [65, 70, 55, 80, 50],
-    "Recorded Date": pd.date_range(start="2024-01-01", periods=5),
-})
-
-# Tabbed view for STEM data
-st.subheader("STEM Data Viewer")
-data_option = st.selectbox(
-    "Choose a dataset to explore", 
-    ["Physics Experiments", "Astronomy Observations", "Weather Data"]
+section = st.sidebar.radio(
+    "Navigation",
+    ["Overview", "Projects", "Publications", "STEM Data", "Contact"]
 )
 
-if data_option == "Physics Experiments":
-    st.write("### Physics Experiment Data")
-    st.dataframe(physics_data)
-    # Add widget to filter by Energy levels
-    energy_filter = st.slider("Filter by Energy (MeV)", 0.0, 10.0, (0.0, 10.0))
-    filtered_physics = physics_data[
-        physics_data["Energy (MeV)"].between(energy_filter[0], energy_filter[1])
-    ]
-    st.write(f"Filtered Results for Energy Range {energy_filter}:")
-    st.dataframe(filtered_physics)
+# -----------------------------
+# Overview
+# -----------------------------
+if section == "Overview":
+    st.title("Researcher Profile")
 
-elif data_option == "Astronomy Observations":
-    st.write("### Astronomy Observation Data")
-    st.dataframe(astronomy_data)
-    # Add widget to filter by Brightness
-    brightness_filter = st.slider("Filter by Brightness (Magnitude)", -15.0, 5.0, (-15.0, 5.0))
-    filtered_astronomy = astronomy_data[
-        astronomy_data["Brightness (Magnitude)"].between(brightness_filter[0], brightness_filter[1])
-    ]
-    st.write(f"Filtered Results for Brightness Range {brightness_filter}:")
-    st.dataframe(filtered_astronomy)
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Projects", "3")
+    col2.metric("Research Focus", "NLP")
+    col3.metric("Languages", "isiZulu + English")
 
-elif data_option == "Weather Data":
-    st.write("### Weather Data")
-    st.dataframe(weather_data)
-    # Add widgets to filter by temperature and humidity
-    temp_filter = st.slider("Filter by Temperature (°C)", -10.0, 40.0, (-10.0, 40.0))
-    humidity_filter = st.slider("Filter by Humidity (%)", 0, 100, (0, 100))
-    filtered_weather = weather_data[
-        weather_data["Temperature (°C)"].between(temp_filter[0], temp_filter[1]) &
-        weather_data["Humidity (%)"].between(humidity_filter[0], humidity_filter[1])
-    ]
-    st.write(f"Filtered Results for Temperature {temp_filter} and Humidity {humidity_filter}:")
-    st.dataframe(filtered_weather)
+    st.markdown("""
+    ### Research Interests
+    - Natural Language Processing (NLP)
+    - Emotion Detection from isiZulu Text
+    - Multilingual Chatbots
+    - Educational Technology
+    - Low-Resource Language AI
+    """)
 
-# Add a contact section
-st.header("Contact Information")
-email = "jane.doe@example.com"
-st.write(f"You can reach {name} at {email}.")
+    st.markdown("""
+    ### Masters Research Vision
+    Building on my honours research in **Emotion Detection from isiZulu Text**, 
+    I aim to extend this work at Masters level by exploring advanced NLP and deep learning
+    techniques for African languages.
+    """)
+
+# -----------------------------
+# Projects
+# -----------------------------
+elif section == "Projects":
+    st.title("Research & Development Projects")
+
+    with st.expander("🤖 Multilingual Student Support Chatbot"):
+        st.markdown("""
+        **Description:**  
+        A chatbot developed to assist UNIZULU first-year students with queries related to
+        university life and academic processes.
+
+        **Key Features:**
+        - Responds in the student’s preferred language
+        - Improves accessibility and inclusivity
+        - Designed for new students entering university
+
+        **Technologies:**
+        - Python
+        - NLP
+        - Chatbot frameworks
+        """)
+
+    with st.expander("🪑 Digital Examination Seating Plan System"):
+        st.markdown("""
+        **Description:**  
+        A digital examination seating plan system designed to improve the traditional
+        manual process used at the University of Zululand.
+
+        **Benefits:**
+        - Faster seat allocation
+        - Reduced errors
+        - Improved organization and fairness
+
+        **Technologies:**
+        - Python
+        - Data handling
+        - Logical allocation algorithms
+        """)
+
+    with st.expander("😊 Emotion Detection from isiZulu Text (Honours Research)"):
+        st.markdown("""
+        **Description:**  
+        Honours-level research focused on detecting emotions from isiZulu text using
+        Natural Language Processing.
+
+        **Focus Areas:**
+        - Low-resource African languages
+        - Text preprocessing
+        - Emotion classification
+
+        **Future Work:**
+        - Extend research at Masters level
+        - Explore deep learning approaches
+        """)
+
+# -----------------------------
+# Publications
+# -----------------------------
+elif section == "Publications":
+    st.title("Publications")
+
+    uploaded_file = st.file_uploader("Upload Publications CSV", type="csv")
+
+    if uploaded_file:
+        publications = pd.read_csv(uploaded_file)
+
+        keyword = st.text_input("Search publications")
+
+        filtered = publications
+        if keyword:
+            filtered = publications[
+                publications.apply(
+                    lambda row: keyword.lower() in row.astype(str).str.lower().values,
+                    axis=1
+                )
+            ]
+
+        st.dataframe(filtered, use_container_width=True)
+
+        if "Year" in publications.columns:
+            st.subheader("Publication Trends")
+            year_counts = publications["Year"].value_counts().sort_index()
+            st.line_chart(year_counts)
+    else:
+        st.info("Upload a CSV file to view publications.")
+
+# -----------------------------
+# STEM Data
+# -----------------------------
+elif section == "STEM Data":
+    st.title("STEM Data Explorer")
+
+    physics_data = pd.DataFrame({
+        "Experiment": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
+        "Energy (MeV)": [4.2, 1.5, 2.9, 3.4, 7.1],
+    })
+
+    astronomy_data = pd.DataFrame({
+        "Celestial Object": ["Mars", "Venus", "Jupiter", "Saturn", "Moon"],
+        "Brightness (Magnitude)": [-2.0, -4.6, -1.8, 0.2, -12.7],
+    })
+
+    weather_data = pd.DataFrame({
+        "City": ["Cape Town", "London", "New York", "Tokyo", "Sydney"],
+        "Temperature (°C)": [25, 10, -3, 15, 30],
+        "Humidity (%)": [65, 70, 55, 80, 50],
+    })
+
+    tab1, tab2, tab3 = st.tabs(["Physics", "Astronomy", "Weather"])
+
+    with tab1:
+        st.dataframe(physics_data)
+        st.bar_chart(physics_data.set_index("Experiment"))
+
+    with tab2:
+        st.dataframe(astronomy_data)
+        st.bar_chart(astronomy_data.set_index("Celestial Object"))
+
+    with tab3:
+        st.dataframe(weather_data)
+        st.scatter_chart(
+            weather_data,
+            x="Temperature (°C)",
+            y="Humidity (%)"
+        )
+
+# -----------------------------
+# Contact
+# -----------------------------
+elif section == "Contact":
+    st.title("Contact Information")
+
+    st.write("📧 Email: mthokozisim@example.com")
+    st.write("🏫 Institution: University of Zululand")
+
+    with st.form("contact_form"):
+        sender_name = st.text_input("Your Name")
+        sender_email = st.text_input("Your Email")
+        message = st.text_area("Message")
+
+        submit = st.form_submit_button("Send Message")
+
+        if submit:
+            st.success("Thank you! Your message has been sent.")
