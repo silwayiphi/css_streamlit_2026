@@ -17,7 +17,7 @@ st.write(f"**Field of Research:** {field}")
 st.write(f"**Institution:** {institution}")
 
 st.image(
-    "https://github.com/silwayiphi/css_streamlit_2026/blob/main/0_POjH5vv_7t8s8loG.png",
+    "https://share.google/0XfdpDBFjE3PT9rwc",
     caption="Data Scientist"
     
 )
