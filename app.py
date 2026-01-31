@@ -146,7 +146,7 @@ elif section == "Contact":
     **Field:** Data Science / Natural Language Processing  
 
     **Email:** your.email@example.com  
-    **Phone / WhatsApp:** +27 XX XXX XXXX
+    **Phone / WhatsApp:** 0825124649
     """)
 
     st.markdown("""
