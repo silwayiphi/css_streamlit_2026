@@ -6,9 +6,9 @@ import numpy as np
 st.title("Researcher Profile Page with STEM Data")
 
 # Collect basic information
-name = "Dr. Jane Doe"
-field = "Astrophysics"
-institution = "University of Science"
+name = "Mr Mthokozisi Silwayiphi Mathonsi"
+field = "Data Science"
+institution = "University of Zululand"
 
 # Display basic profile information
 st.header("Researcher Overview")
