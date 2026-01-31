@@ -187,7 +187,7 @@ elif section == "STEM Data":
 elif section == "Contact":
     st.title("Contact Information")
 
-    st.write("📧 Email: mthokozisim@example.com")
+    st.write("📧 Email: mthokoh0201@gmail.com.com")
     st.write("🏫 Institution: University of Zululand")
 
     with st.form("contact_form"):
