@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
 
 # -----------------------------
 # Page configuration
@@ -13,18 +12,13 @@ st.set_page_config(
 # -----------------------------
 # Sidebar
 # -----------------------------
-st.sidebar.image(
-    "useMe.jpg",
-    width=200
-)
-
 st.sidebar.title("Mr Mthokozisi S. Mathonsi")
 st.sidebar.write("🎓 Data Scientist")
 st.sidebar.write("🏫 University of Zululand")
 
 section = st.sidebar.radio(
     "Navigation",
-    ["Overview", "Projects", "Publications", "STEM Data", "Contact"]
+    ["Overview", "Projects", "Publications", "Contact"]
 )
 
 # -----------------------------
@@ -35,8 +29,8 @@ if section == "Overview":
 
     col1, col2, col3 = st.columns(3)
     col1.metric("Projects", "3")
-    col2.metric("Research Focus", "NLP")
-    col3.metric("Languages", "isiZulu + English")
+    col2.metric("Research Area", "NLP")
+    col3.metric("Focus Language", "isiZulu")
 
     st.markdown("""
     ### Research Interests
@@ -44,14 +38,14 @@ if section == "Overview":
     - Emotion Detection from isiZulu Text
     - Multilingual Chatbots
     - Educational Technology
-    - Low-Resource Language AI
+    - Low-resource African Languages
     """)
 
     st.markdown("""
-    ### Masters Research Vision
-    Building on my honours research in **Emotion Detection from isiZulu Text**, 
-    I aim to extend this work at Masters level by exploring advanced NLP and deep learning
-    techniques for African languages.
+    ### Academic Journey
+    I completed my Honours research on **Emotion Detection from isiZulu Text using NLP**.
+    I am looking forward to extending this research at **Masters level**, with a focus on
+    advanced NLP techniques for low-resource languages.
     """)
 
 # -----------------------------
@@ -63,51 +57,37 @@ elif section == "Projects":
     with st.expander("🤖 Multilingual Student Support Chatbot"):
         st.markdown("""
         **Description:**  
-        A chatbot developed to assist UNIZULU first-year students with queries related to
-        university life and academic processes.
+        A chatbot developed to assist first-year University of Zululand students with
+        queries related to university life and transitioning into higher education.
 
         **Key Features:**
         - Responds in the student’s preferred language
         - Improves accessibility and inclusivity
         - Designed for new students entering university
-
-        **Technologies:**
-        - Python
-        - NLP
-        - Chatbot frameworks
         """)
 
     with st.expander("🪑 Digital Examination Seating Plan System"):
         st.markdown("""
         **Description:**  
-        A digital examination seating plan system designed to improve the traditional
-        manual process used at the University of Zululand.
+        A digital examination seating plan system developed to improve the traditional
+        manual seating arrangement used at the University of Zululand.
 
-        **Benefits:**
-        - Faster seat allocation
-        - Reduced errors
-        - Improved organization and fairness
-
-        **Technologies:**
-        - Python
-        - Data handling
-        - Logical allocation algorithms
+        **Improvements:**
+        - Automated seat allocation
+        - Reduced human error
+        - Improved efficiency and organization
         """)
 
     with st.expander("😊 Emotion Detection from isiZulu Text (Honours Research)"):
         st.markdown("""
         **Description:**  
-        Honours-level research focused on detecting emotions from isiZulu text using
-        Natural Language Processing.
+        An honours research project focused on detecting emotions from isiZulu text
+        using Natural Language Processing.
 
-        **Focus Areas:**
-        - Low-resource African languages
-        - Text preprocessing
+        **Research Focus:**
+        - Text preprocessing for isiZulu
         - Emotion classification
-
-        **Future Work:**
-        - Extend research at Masters level
-        - Explore deep learning approaches
+        - Low-resource language challenges
         """)
 
 # -----------------------------
@@ -121,7 +101,7 @@ elif section == "Publications":
     if uploaded_file:
         publications = pd.read_csv(uploaded_file)
 
-        keyword = st.text_input("Search publications")
+        keyword = st.text_input("Search publications by keyword")
 
         filtered = publications
         if keyword:
@@ -135,51 +115,11 @@ elif section == "Publications":
         st.dataframe(filtered, use_container_width=True)
 
         if "Year" in publications.columns:
-            st.subheader("Publication Trends")
+            st.subheader("Publication Trend")
             year_counts = publications["Year"].value_counts().sort_index()
             st.line_chart(year_counts)
     else:
-        st.info("Upload a CSV file to view publications.")
-
-# -----------------------------
-# STEM Data
-# -----------------------------
-elif section == "STEM Data":
-    st.title("STEM Data Explorer")
-
-    physics_data = pd.DataFrame({
-        "Experiment": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
-        "Energy (MeV)": [4.2, 1.5, 2.9, 3.4, 7.1],
-    })
-
-    astronomy_data = pd.DataFrame({
-        "Celestial Object": ["Mars", "Venus", "Jupiter", "Saturn", "Moon"],
-        "Brightness (Magnitude)": [-2.0, -4.6, -1.8, 0.2, -12.7],
-    })
-
-    weather_data = pd.DataFrame({
-        "City": ["Cape Town", "London", "New York", "Tokyo", "Sydney"],
-        "Temperature (°C)": [25, 10, -3, 15, 30],
-        "Humidity (%)": [65, 70, 55, 80, 50],
-    })
-
-    tab1, tab2, tab3 = st.tabs(["Physics", "Astronomy", "Weather"])
-
-    with tab1:
-        st.dataframe(physics_data)
-        st.bar_chart(physics_data.set_index("Experiment"))
-
-    with tab2:
-        st.dataframe(astronomy_data)
-        st.bar_chart(astronomy_data.set_index("Celestial Object"))
-
-    with tab3:
-        st.dataframe(weather_data)
-        st.scatter_chart(
-            weather_data,
-            x="Temperature (°C)",
-            y="Humidity (%)"
-        )
+        st.info("Upload a CSV file to display publications.")
 
 # -----------------------------
 # Contact
@@ -187,15 +127,16 @@ elif section == "STEM Data":
 elif section == "Contact":
     st.title("Contact Information")
 
-    st.write("📧 Email: mthokoh0201@gmail.com.com")
-    st.write("🏫 Institution: University of Zululand")
+    st.markdown("""
+    **Name:** Mr Mthokozisi Silwayiphi Mathonsi  
+    **Institution:** University of Zululand  
+    **Field:** Data Science / NLP  
 
-    with st.form("contact_form"):
-        sender_name = st.text_input("Your Name")
-        sender_email = st.text_input("Your Email")
-        message = st.text_area("Message")
+    **Email:** mthokozisi.mathonsi@example.com  
+    **WhatsApp:** +27 XX XXX XXXX
+    """)
 
-        submit = st.form_submit_button("Send Message")
-
-        if submit:
-            st.success("Thank you! Your message has been sent.")
+    st.markdown("""
+    You may contact me regarding academic collaboration, research discussions,
+    or postgraduate studies.
+    """)
