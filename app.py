@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 
 # -----------------------------
 # Page configuration
@@ -10,43 +9,85 @@ st.set_page_config(
 )
 
 # -----------------------------
-# Sidebar
+# Sidebar (Profile + Navigation)
 # -----------------------------
+try:
+    st.sidebar.image("profile.jpg", width=200)
+except:
+    st.sidebar.image(
+        "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+        width=200
+    )
+
 st.sidebar.title("Mr Mthokozisi S. Mathonsi")
 st.sidebar.write("🎓 Data Scientist")
 st.sidebar.write("🏫 University of Zululand")
 
 section = st.sidebar.radio(
     "Navigation",
-    ["Overview", "Projects", "Publications", "Contact"]
+    ["About Me", "Skills & Tools", "Projects", "Contact"]
 )
 
 # -----------------------------
-# Overview
+# About Me
 # -----------------------------
-if section == "Overview":
-    st.title("Researcher Profile")
+if section == "About Me":
+    st.title("About Me")
 
     col1, col2, col3 = st.columns(3)
-    col1.metric("Projects", "3")
+    col1.metric("Academic Level", "Honours")
     col2.metric("Research Area", "NLP")
     col3.metric("Focus Language", "isiZulu")
 
     st.markdown("""
-    ### Research Interests
-    - Natural Language Processing (NLP)
-    - Emotion Detection from isiZulu Text
-    - Multilingual Chatbots
-    - Educational Technology
-    - Low-resource African Languages
+    I am a Data Science graduate from the **University of Zululand** with a strong interest
+    in **Natural Language Processing (NLP)** and **low-resource African languages**.
+
+    My academic and practical work focuses on applying data science and NLP techniques
+    to solve real-world problems in education and language technology.
+
+    At honours level, I conducted research on **Emotion Detection from isiZulu Text using NLP**,
+    and I intend to further extend this research at **Masters level**.
     """)
 
     st.markdown("""
-    ### Academic Journey
-    I completed my Honours research on **Emotion Detection from isiZulu Text using NLP**.
-    I am looking forward to extending this research at **Masters level**, with a focus on
-    advanced NLP techniques for low-resource languages.
+    ### Research Interests
+    - Natural Language Processing (NLP)
+    - Emotion Detection and Sentiment Analysis
+    - Low-resource African Languages
+    - Multilingual Systems
+    - Educational Technology
     """)
+
+# -----------------------------
+# Skills & Tools
+# -----------------------------
+elif section == "Skills & Tools":
+    st.title("Skills & Tools")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("Technical Skills")
+        st.markdown("""
+        - Data Analysis
+        - Natural Language Processing (NLP)
+        - Machine Learning
+        - Text Preprocessing
+        - Chatbot Development
+        - Research & Academic Writing
+        """)
+
+    with col2:
+        st.subheader("Tools & Technologies")
+        st.markdown("""
+        - Python
+        - Pandas & NumPy
+        - Streamlit
+        - Scikit-learn
+        - Jupyter Notebook
+        - Git & GitHub
+        """)
 
 # -----------------------------
 # Projects
@@ -58,68 +99,40 @@ elif section == "Projects":
         st.markdown("""
         **Description:**  
         A chatbot developed to assist first-year University of Zululand students with
-        queries related to university life and transitioning into higher education.
+        queries related to university life and adapting to higher education.
 
         **Key Features:**
         - Responds in the student’s preferred language
         - Improves accessibility and inclusivity
-        - Designed for new students entering university
+        - Designed specifically for first-year students
         """)
 
     with st.expander("🪑 Digital Examination Seating Plan System"):
         st.markdown("""
         **Description:**  
-        A digital examination seating plan system developed to improve the traditional
-        manual seating arrangement used at the University of Zululand.
+        A digital examination seating plan system designed to improve the traditional
+        manual seating arrangement used at the University.
 
-        **Improvements:**
+        **Impact:**
         - Automated seat allocation
-        - Reduced human error
-        - Improved efficiency and organization
+        - Reduced administrative errors
+        - Improved efficiency during examinations
         """)
 
     with st.expander("😊 Emotion Detection from isiZulu Text (Honours Research)"):
         st.markdown("""
         **Description:**  
-        An honours research project focused on detecting emotions from isiZulu text
-        using Natural Language Processing.
+        An honours research project focused on detecting emotions from isiZulu text using
+        Natural Language Processing techniques.
 
-        **Research Focus:**
+        **Focus Areas:**
         - Text preprocessing for isiZulu
         - Emotion classification
-        - Low-resource language challenges
+        - Challenges in low-resource languages
+
+        **Future Direction:**
+        - Extension of this research at Masters level
         """)
-
-# -----------------------------
-# Publications
-# -----------------------------
-elif section == "Publications":
-    st.title("Publications")
-
-    uploaded_file = st.file_uploader("Upload Publications CSV", type="csv")
-
-    if uploaded_file:
-        publications = pd.read_csv(uploaded_file)
-
-        keyword = st.text_input("Search publications by keyword")
-
-        filtered = publications
-        if keyword:
-            filtered = publications[
-                publications.apply(
-                    lambda row: keyword.lower() in row.astype(str).str.lower().values,
-                    axis=1
-                )
-            ]
-
-        st.dataframe(filtered, use_container_width=True)
-
-        if "Year" in publications.columns:
-            st.subheader("Publication Trend")
-            year_counts = publications["Year"].value_counts().sort_index()
-            st.line_chart(year_counts)
-    else:
-        st.info("Upload a CSV file to display publications.")
 
 # -----------------------------
 # Contact
@@ -130,13 +143,13 @@ elif section == "Contact":
     st.markdown("""
     **Name:** Mr Mthokozisi Silwayiphi Mathonsi  
     **Institution:** University of Zululand  
-    **Field:** Data Science / NLP  
+    **Field:** Data Science / Natural Language Processing  
 
-    **Email:** mthokozisi.mathonsi@example.com  
-    **WhatsApp:** +27 XX XXX XXXX
+    **Email:** your.email@example.com  
+    **Phone / WhatsApp:** +27 XX XXX XXXX
     """)
 
     st.markdown("""
-    You may contact me regarding academic collaboration, research discussions,
-    or postgraduate studies.
+    You may contact me for academic discussions, research collaboration,
+    or postgraduate-related inquiries.
     """)
