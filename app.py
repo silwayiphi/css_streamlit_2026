@@ -40,21 +40,21 @@ if section == "About Me":
     col3.metric("Focus Language", "isiZulu")
 
   st.markdown("""
-I am a Data Science graduate from the **University of Zululand** with a strong interest
-in **Natural Language Processing (NLP)** and **low-resource African languages**.
-
-My academic journey began with a strong foundation in **software engineering**, where I
-developed several applications during my undergraduate studies. Through this experience,
-I gained practical skills in problem-solving, system development, and building real-world
-applications.
-
-Over time, my interests evolved towards **Data Science and Machine Learning**, where I now
-focus on applying data-driven and NLP techniques to solve real-world problems in education
-and language technology.
-
-At honours level, I conducted research on **Emotion Detection from isiZulu Text using NLP**,
-and I intend to further extend this research at **Masters level**.
-""")
+    I am a Data Science graduate from the **University of Zululand** with a strong interest
+    in **Natural Language Processing (NLP)** and **low-resource African languages**.
+    
+    My academic journey began with a strong foundation in **software engineering**, where I
+    developed several applications during my undergraduate studies. Through this experience,
+    I gained practical skills in problem-solving, system development, and building real-world
+    applications.
+    
+    Over time, my interests evolved towards **Data Science and Machine Learning**, where I now
+    focus on applying data-driven and NLP techniques to solve real-world problems in education
+    and language technology.
+    
+    At honours level, I conducted research on **Emotion Detection from isiZulu Text using NLP**,
+    and I intend to further extend this research at **Masters level**.
+    """)
 
 
     st.markdown("""
