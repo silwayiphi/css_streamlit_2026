@@ -152,7 +152,7 @@ elif section == "Contact":
     **Institution:** University of Zululand  
     **Field:** Data Science / Natural Language Processing  
 
-    **Email:** your.email@example.com  
+    **Email:** mthokoh0201@gmail.com  
     **Phone / WhatsApp:** 0825124649
     """)
 
